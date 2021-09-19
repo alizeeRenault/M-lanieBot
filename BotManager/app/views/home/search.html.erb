@@ -2,13 +2,14 @@
 <script>
   function resizeIframe(obj) {
     obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.documentElement.scrollWidth + 'px';
   }
 </script>
 
 <% @tweets.each do |t| %>
 	<% aler_text = Alert.find(t.alert_id).try(:text) %>
 	<section style="display:flex;width:100%;margin-bottom: 10px;" data-search="<%= aler_text %>">
-		<iframe src="https://twitframe.com/show?url=<%= t.link %>" width="50%;" frameborder="0" scrolling="no" onload="resizeIframe(this)">
+		<iframe src="https://twitframe.com/show?url=<%= t.link %>" frameborder="0" scrolling="no" onload="resizeIframe(this)">
 			
 		</iframe>
 		<div style="width:45%;margin-left: 20px;">
