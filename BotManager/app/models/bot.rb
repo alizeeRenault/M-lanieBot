@@ -39,7 +39,7 @@ class Bot < ApplicationRecord
 		end
 		original_tweets.each do |ot|
 			Bot.archive ot[0].url.to_s
-			Tweet.create(tid: otot[0].id, link: otot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
+			Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
 		end
 	end
 end
