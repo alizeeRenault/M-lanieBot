@@ -10,12 +10,14 @@
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
+    $("section").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
 });
 </script>
+
+<input style="margin-top: 30px;margin-bottom: 30px;" id="myInput" type="text" placeholder="Search..">
 
 <% @tweets.each do |t| %>
 	<% aler_text = Alert.find(t.alert_id).try(:text) %>
