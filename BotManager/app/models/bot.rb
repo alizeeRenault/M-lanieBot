@@ -39,7 +39,5 @@ class Bot < ApplicationRecord
 			Bot.archive ot.url.to_s
 			Tweet.create(tid: ot.id, link: ot.url.to_s, user_name: ot.user.screen_name, text: ot.text, archive_link: "https://web.archive.org/web/*/" + ot.url.to_s)
 		end
-
-
 	end
 end
