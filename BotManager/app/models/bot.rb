@@ -32,8 +32,10 @@ class Bot < ApplicationRecord
 		tweets = sanitize_search_result search
 		original_tweets = []
 		tweets.each do |t|
-			Alert.create(tid: t.id, link: t.url.to_s, user_name: t.user.screen_name, text: t.text)
-			original_tweets << Bot.find_by_id(t.in_reply_to_status_id)
+			if t.in_reply_to_status_id
+				Alert.create(tid: t.id, link: t.url.to_s, user_name: t.user.screen_name, text: t.text)
+				original_tweets << Bot.find_by_id(t.in_reply_to_status_id)
+			end
 		end
 		original_tweets.each do |ot|
 			Bot.archive ot.url.to_s
