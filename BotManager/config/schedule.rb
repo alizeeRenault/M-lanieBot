@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minute do
+every 2.minute do
   runner "Bot.watch_YOU_SHALL_NOT_PASS"
 end
