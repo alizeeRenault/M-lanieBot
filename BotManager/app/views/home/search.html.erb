@@ -1,9 +1,9 @@
 
 <% @tweets.each do |t| %>
 	<%= t.tid %> </br>
-	<%= t.link %> </br>
+	<a href="<%= t.link %>" target="_blank"><%= t.link %></a> </br>
 	<%= t.user_name %> </br>
 	<%= t.text %> </br>
-	<%= t.archive_link %> </br>
+	<a href="<%= t.archive_link %>" target="_blank"><%= t.archive_link %></a> </br>
 	 </br>
 <% end %>
