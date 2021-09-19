@@ -3,7 +3,7 @@ class Bot < ApplicationRecord
 	require 'net/http'
 
 	def self.search_words words
-		CLIENT.search(words, since_id: (Alert.last.try(:id) || 1439344091934900224), include_entities: false)
+		CLIENT.search(words, since_id: (Alert.last.try(:tid) || 1439344091934900224), include_entities: false)
 	end
 
 	def self.historic words
