@@ -33,13 +33,13 @@ class Bot < ApplicationRecord
 		original_tweets = []
 		tweets.each do |t|
 			if t.try(:in_reply_to_status_id)
-				Alert.create(tid: t.id, link: t.url.to_s, user_name: t.user.screen_name, text: t.text)
-				original_tweets << Bot.find_by_id(t.in_reply_to_status_id)
+				a = Alert.create(tid: t.id, link: t.url.to_s, user_name: t.user.screen_name, text: t.text)
+				original_tweets << [Bot.find_by_id(t.in_reply_to_status_id), a.id]
 			end
 		end
 		original_tweets.each do |ot|
-			Bot.archive ot.url.to_s
-			Tweet.create(tid: ot.id, link: ot.url.to_s, user_name: ot.user.screen_name, text: ot.text, archive_link: "https://web.archive.org/web/*/" + ot.url.to_s)
+			Bot.archive ot[0].url.to_s
+			Tweet.create(tid: otot[0].id, link: otot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
 		end
 	end
 end

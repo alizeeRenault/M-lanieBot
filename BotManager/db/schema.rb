@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_222835) do
+ActiveRecord::Schema.define(version: 2021_09_19_140636) do
 
   create_table "alerts", force: :cascade do |t|
     t.integer "tid"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2021_09_18_222835) do
     t.string "archive_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "alert_id", null: false
+    t.index ["alert_id"], name: "index_tweets_on_alert_id"
   end
 
+  add_foreign_key "tweets", "alerts"
 end
