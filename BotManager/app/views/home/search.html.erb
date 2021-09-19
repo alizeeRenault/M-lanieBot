@@ -6,9 +6,20 @@
   }
 </script>
 
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 <% @tweets.each do |t| %>
 	<% aler_text = Alert.find(t.alert_id).try(:text) %>
-	<section style="display:flex;width:100%;margin-bottom: 10px;" data-search="<%= aler_text %>">
+	<section style="display:flex;width:100%;margin-bottom: 10px;" data-search="<%= aler_text %> <%= t.user_name %>">
 		<iframe src="https://twitframe.com/show?url=<%= t.link %>" width="400px" height="580px" frameborder="0" onload="resizeIframe(this)">
 			
 		</iframe>
