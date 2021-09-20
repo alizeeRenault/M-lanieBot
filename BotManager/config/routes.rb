@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/keyword/:keyword' => 'home#keyword'
   get '/user/:user' => 'home#user'
   get '/alerter/:alerter' => 'home#alerter'
+  get '/stats' => 'home#stat'
 
 
 
