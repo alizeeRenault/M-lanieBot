@@ -29,4 +29,11 @@ class HomeController < ApplicationController
 	end
 	render "search" and return
   end
+
+  def stat
+  	@tweet_count = Tweet.all.group(:tid).count.count
+  	@account_count = Tweet.all.group(:user_name).count.count
+  	@alert_count = Alert.all.group(:tid).count.count
+  	@alerter_count = Alert.all.group(:user_name).count.count
+  end
 end
