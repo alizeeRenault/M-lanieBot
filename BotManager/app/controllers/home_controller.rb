@@ -1,13 +1,13 @@
 class HomeController < ApplicationController
   def search
-  	@tweets = Tweet.all
+  	@tweets = Tweet.all.order("created_at DESC")
   end
 
   def keyword
   	if !params.has_key?(:keyword) || params[:keyword].blank?
 	  	@tweets = Tweet.None
   	else
-	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.text LIKE ?", "%#{params[:keyword]}%")
+	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.text LIKE ?", "%#{params[:keyword]}%").order("created_at DESC")
 	end
 	render "search" and return
   end
@@ -16,7 +16,7 @@ class HomeController < ApplicationController
   	if !params.has_key?(:user) || params[:user].blank?
 	  	@tweets = Tweet.None
   	else
-	  	@tweets = Tweet.where("user_name LIKE ?", "%#{params[:user]}%")
+	  	@tweets = Tweet.where("user_name LIKE ?", "%#{params[:user]}%").order("created_at DESC")
 	end
 	render "search" and return
   end
@@ -25,7 +25,7 @@ class HomeController < ApplicationController
   	if !params.has_key?(:alerter) || params[:alerter].blank?
 	  	@tweets = Tweet.None
   	else
-	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.user_name LIKE ?", "%#{params[:alerter]}%")
+	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.user_name LIKE ?", "%#{params[:alerter]}%").order("created_at DESC")
 	end
 	render "search" and return
   end

@@ -42,4 +42,52 @@ class Bot < ApplicationRecord
 			Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
 		end
 	end
+
+	def self.historic_YOU_SHALL_NOT_PASS
+		search = CLIENT.search("#VousNePasserezPas", since_id: 439344091934900224, include_entities: false)
+		tweets = sanitize_search_result search
+		original_tweets = []
+		tweets.each do |t|
+			if Alert.where(tid: t.id).count == 0
+				a = Alert.create(tid: t.id, link: t.url.to_s, user_name: t.user.screen_name, text: t.text)
+				begin
+					original_tweets << [Bot.find_by_id(t.in_reply_to_status_id), a.id]
+				rescue
+				end
+			end
+		end
+		original_tweets.each do |ot|
+			if Tweet.where(tid: ot[0].id).count == 0
+				Bot.archive ot[0].url.to_s
+				Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
+			end
+		end
+	end
+	def self.re_import_from_alert
+		original_tweets = []
+		Alert.all.each do |a|
+			begin
+				t = Bot.find_by_id(a.tid)
+				original_tweets << [Bot.find_by_id(t.in_reply_to_status_id), a.id]
+			rescue
+			end
+		end
+		original_tweets.each do |ot|
+			if Tweet.where(tid: ot[0].id).count == 0
+				Bot.archive ot[0].url.to_s
+				Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
+			end
+		end
+	end
+
+	def self.add_tweet_from_alert_id, alert_id
+		alert = Bot.find_by_id(alert_id) rescue nil
+		return nil if !alert
+		tweet = Bot.find_by_id(alert.in_reply_to_status_id) rescue nil
+		return nil if !tweet
+		if Tweet.where(tid: tweet.id).count == 0
+			Bot.archive tweet.url.to_s
+			Tweet.create(tid: tweet.id, link: tweet.url.to_s, user_name: tweet.user.screen_name, text: tweet.text, archive_link: "https://web.archive.org/web/*/" + tweet.url.to_s, alert_id: alert_id)
+		end
+	end
 end
