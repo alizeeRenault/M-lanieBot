@@ -11,7 +11,7 @@ class Bot < ApplicationRecord
 	end
 
 	def self.find_by_id id
-		CLIENT.status(id)
+		CLIENT.status(id) rescue nil
 	end
 
 	def self.sanitize_search_result search
@@ -38,8 +38,10 @@ class Bot < ApplicationRecord
 			end
 		end
 		original_tweets.each do |ot|
-			Bot.archive ot[0].url.to_s
-			Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
+			if !ot.nil?
+				Bot.archive ot[0].url.to_s
+				Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
+			end
 		end
 	end
 
@@ -57,7 +59,7 @@ class Bot < ApplicationRecord
 			end
 		end
 		original_tweets.each do |ot|
-			if Tweet.where(tid: ot[0].id).count == 0
+			if !ot.nil? && Tweet.where(tid: ot[0].id).count == 0
 				Bot.archive ot[0].url.to_s
 				Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
 			end
@@ -73,7 +75,7 @@ class Bot < ApplicationRecord
 			end
 		end
 		original_tweets.each do |ot|
-			if Tweet.where(tid: ot[0].id).count == 0
+			if !ot.nil? && Tweet.where(tid: ot[0].id).count == 0
 				Bot.archive ot[0].url.to_s
 				Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
 			end
