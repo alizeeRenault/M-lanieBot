@@ -80,7 +80,7 @@ class Bot < ApplicationRecord
 		end
 	end
 
-	def self.add_tweet_from_alert_id, alert_id
+	def self.add_tweet_from_alert_id alert_id
 		alert = Bot.find_by_id(alert_id) rescue nil
 		return nil if !alert
 		tweet = Bot.find_by_id(alert.in_reply_to_status_id) rescue nil
