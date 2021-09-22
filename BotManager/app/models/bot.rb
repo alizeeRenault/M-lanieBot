@@ -38,7 +38,7 @@ class Bot < ApplicationRecord
 			end
 		end
 		original_tweets.each do |ot|
-			if !ot.nil?
+			if !ot.nil? && Tweet.where(tid: ot[0].id).count == 0
 				Bot.archive ot[0].url.to_s
 				Tweet.create(tid: ot[0].id, link: ot[0].url.to_s, user_name: ot[0].user.screen_name, text: ot[0].text, archive_link: "https://web.archive.org/web/*/" + ot[0].url.to_s, alert_id: ot[1])
 			end
