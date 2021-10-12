@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/user/:user' => 'home#user'
   get '/alerter/:alerter' => 'home#alerter'
   get '/stats' => 'home#stat'
-
-
+  get '/delete' => 'home#delete'
+  delete '/delete/tweet' => 'home#delete_tweet'
+  delete '/delete/user' => 'home#delete_user'
 
 end

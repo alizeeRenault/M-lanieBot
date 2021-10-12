@@ -53,4 +53,23 @@ class HomeController < ApplicationController
   	@alert_count = Alert.all.group(:tid).count.count
   	@alerter_count = Alert.all.group(:user_name).count.count
   end
+
+  def delete
+  end
+
+  def delete_tweet
+  	w = Digest::SHA1.hexdigest(params[:password])
+  	if w == "970b17215b3d93ca46cb900e7d625541e0bbb8e3"
+  		Tweet.where(tid: params[:tid]).delete_all
+  	end
+  	render "delete" and return
+  end
+
+  def delete_user
+  	w = Digest::SHA1.hexdigest(params[:password])
+  	if w == "970b17215b3d93ca46cb900e7d625541e0bbb8e3"
+  		Tweet.where(user_name: params[:user_name]).delete_all
+  	end
+  	render "delete" and return
+  end
 end

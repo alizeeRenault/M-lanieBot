@@ -1,0 +1,13 @@
+<%= form_with url: "/delete/tweet", method: :delete do |form| %>
+  <%= form.label :tid, "delete tweet:" %>
+  <%= form.text_field :tid %>
+  <%= form.text_field :password %>
+  <%= form.submit "delete" %>
+<% end 
+
+<%= form_with url: "/delete/user", method: :delete do |form| %>
+  <%= form.label :user_name, "delete username:" %>
+  <%= form.text_field :user_name %>
+  <%= form.text_field :password %>
+  <%= form.submit "delete" %>
+<% end %>
