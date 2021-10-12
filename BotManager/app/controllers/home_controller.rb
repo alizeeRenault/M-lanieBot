@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  require 'csv'
   def search
   	@tweets = Tweet.all.order("created_at DESC")
 	respond_to do |format|
@@ -27,7 +28,7 @@ class HomeController < ApplicationController
 	  	@tweets = Tweet.where("user_name LIKE ?", "%#{params[:user]}%").order("created_at DESC")
 	end
 	respond_to do |format|
-		
+
 		format.html { render "search" and return }
 		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
 	end
@@ -40,7 +41,7 @@ class HomeController < ApplicationController
 	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.user_name LIKE ?", "%#{params[:alerter]}%").order("created_at DESC")
 	end
 	respond_to do |format|
-		
+
 		format.html { render "search" and return }
 		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
 	end
