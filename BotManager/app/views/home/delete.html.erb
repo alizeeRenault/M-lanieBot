@@ -3,7 +3,7 @@
   <%= form.text_field :tid %>
   <%= form.text_field :password %>
   <%= form.submit "delete" %>
-<% end 
+<% end %>
 
 <%= form_with url: "/delete/user", method: :delete do |form| %>
   <%= form.label :user_name, "delete username:" %>
