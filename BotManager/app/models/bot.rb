@@ -92,4 +92,11 @@ class Bot < ApplicationRecord
 			Tweet.create(tid: tweet.id, link: tweet.url.to_s, user_name: tweet.user.screen_name, text: tweet.text, archive_link: "https://web.archive.org/web/*/" + tweet.url.to_s, alert_id: alert_id)
 		end
 	end
+
+	def self.remove_duplicated_entry
+		ids = Tweet.group(:tid).pluck('MIN(id)')
+		Tweet.where.not(id: ids).destroy_all
+		idsa = Alert.joins("INNER JOIN tweets on tweets.alert_id = alerts.id").ids
+		Alert.where.not(id: idsa).destroy_all
+	end
 end

@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def search
   	@tweets = Tweet.all.order("created_at DESC")
+	respond_to do |format|
+		format.html
+		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+	end
   end
 
   def keyword
