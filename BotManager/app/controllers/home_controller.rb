@@ -13,7 +13,11 @@ class HomeController < ApplicationController
   	else
 	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.text LIKE ?", "%#{params[:keyword]}%").order("created_at DESC")
 	end
-	render "search" and return
+
+	respond_to do |format|
+		render "search" and return
+		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+	end
   end
 
   def user
@@ -22,7 +26,10 @@ class HomeController < ApplicationController
   	else
 	  	@tweets = Tweet.where("user_name LIKE ?", "%#{params[:user]}%").order("created_at DESC")
 	end
-	render "search" and return
+	respond_to do |format|
+		render "search" and return
+		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+	end
   end
 
   def alerter
@@ -31,7 +38,10 @@ class HomeController < ApplicationController
   	else
 	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.user_name LIKE ?", "%#{params[:alerter]}%").order("created_at DESC")
 	end
-	render "search" and return
+	respond_to do |format|
+		render "search" and return
+		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+	end
   end
 
   def stat
