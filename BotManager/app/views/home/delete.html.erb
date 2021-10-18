@@ -11,3 +11,11 @@
   <%= form.text_field :password %>
   <%= form.submit "delete" %>
 <% end %>
+
+
+<%= form_with url: "/add/tweet", method: :delete do |form| %>
+  <%= form.label :user_name, "add tweet from id:" %>
+  <%= form.text_field :tid %>
+  <%= form.text_field :password %>
+  <%= form.submit "add" %>
+<% end %>

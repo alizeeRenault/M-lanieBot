@@ -72,4 +72,15 @@ class HomeController < ApplicationController
   	end
   	render "delete" and return
   end
+
+  def add_tweet
+  	w = Digest::SHA1.hexdigest(params[:password])
+  	if w == "970b17215b3d93ca46cb900e7d625541e0bbb8e3"
+  		begin
+  			Bot.add_one_tweet params[:tid]
+  		rescue
+  		end
+  	end
+  	render "delete" and return
+  end
 end

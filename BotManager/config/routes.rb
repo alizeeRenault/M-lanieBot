@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get '/delete' => 'home#delete'
   delete '/delete/tweet' => 'home#delete_tweet'
   delete '/delete/user' => 'home#delete_user'
+  delete '/add/tweet' => 'home#add_tweet'
 
 end
