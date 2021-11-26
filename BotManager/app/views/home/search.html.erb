@@ -17,7 +17,56 @@ $(document).ready(function(){
 });
 </script>
 
-<input style="margin-top: 30px;margin-bottom: 30px;" id="myInput" type="text" placeholder="Search..">
+
+<div class="header bg-info pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+           <h2 class="text-white d-inline-block mb-0">Latest</h2>
+        </div>
+      </div>
+      <!-- Card stats -->
+      <div class="align-items-center">
+        <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Search on the fly</h5>
+                  <input style="margin-top: 10px;margin-bottom: 10px;width: 90%;" id="myInput" type="text" placeholder="">
+                  <p href="">For regular search just type <b>/search/YOUR_SEARCH</b> in url bar</p>
+                  <!-- <span class="h2 font-weight-bold mb-0">661</span> -->
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                    <i class="ni ni-active-40"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="text-success mr-2"><i class="fa fa-calendar"></i> <%= @total_tweets.count %></span>
+                <span class="text-nowrap">since begining</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div id="index-paginate">
+    <%= paginate @tweets, param_name: :tweets_page, remote: true, :window => 3 %>
+  </div>
+</div>
+
 
 <% @tweets.each do |t| %>
 	<% aler_text = Alert.find(t.alert_id).try(:text) %>
@@ -38,3 +87,9 @@ $(document).ready(function(){
 	</section>
 <% end %>
 
+
+<div>
+  <div id="index-paginate">
+    <%= paginate @tweets, param_name: :tweets_page, remote: true, :window => 3 %>
+  </div>
+</div>
