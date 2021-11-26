@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 <div>
   <div id="index-paginate">
-    <%= paginate @tweets, param_name: :tweets_page, remote: true, :window => 3 %>
+    <%= paginate @tweets, param_name: :tweets_page, theme: :dashboard, :window => 3 %>
   </div>
 </div>
 
@@ -90,6 +90,6 @@ $(document).ready(function(){
 
 <div>
   <div id="index-paginate">
-    <%= paginate @tweets, param_name: :tweets_page, remote: true, :window => 3 %>
+    <%= paginate @tweets, param_name: :tweets_page, theme: :dashboard, :window => 3 %>
   </div>
 </div>
