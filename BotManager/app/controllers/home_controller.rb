@@ -1,49 +1,54 @@
 class HomeController < ApplicationController
   require 'csv'
   def search
-  	@tweets = Tweet.all.order("created_at DESC")
+  	@total_tweets = Tweet.all.order("created_at DESC")
+  	@tweets = @total_tweets.page(params[:tweets_page]).per(20)
 	respond_to do |format|
 		format.html
-		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+		format.csv { send_data @total_tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
 	end
   end
 
   def keyword
   	if !params.has_key?(:keyword) || params[:keyword].blank?
-	  	@tweets = Tweet.None
+	  	@total_tweets = Tweet.None
   	else
-	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.text LIKE ?", "%#{params[:keyword]}%").order("created_at DESC")
+	  	@total_tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.text LIKE ?", "%#{params[:keyword]}%").order("created_at DESC")
 	end
 
+  	@tweets = @total_tweets.page(params[:tweets_page]).per(20)
 	respond_to do |format|
 		format.html { render "search" and return }
-		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+		format.csv { send_data @total_tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
 	end
   end
 
   def user
   	if !params.has_key?(:user) || params[:user].blank?
-	  	@tweets = Tweet.None
+	  	@total_tweets = Tweet.None
   	else
-	  	@tweets = Tweet.where("user_name LIKE ?", "%#{params[:user]}%").order("created_at DESC")
+	  	@total_tweets = Tweet.where("user_name LIKE ?", "%#{params[:user]}%").order("created_at DESC")
 	end
+  	@tweets = @total_tweets.page(params[:tweets_page]).per(20)
+
 	respond_to do |format|
 
 		format.html { render "search" and return }
-		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+		format.csv { send_data @total_tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
 	end
   end
 
   def alerter
   	if !params.has_key?(:alerter) || params[:alerter].blank?
-	  	@tweets = Tweet.None
+	  	@total_tweets = Tweet.None
   	else
-	  	@tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.user_name LIKE ?", "%#{params[:alerter]}%").order("created_at DESC")
+	  	@total_tweets = Tweet.joins("INNER JOIN alerts on tweets.alert_id = alerts.id").where("alerts.user_name LIKE ?", "%#{params[:alerter]}%").order("created_at DESC")
 	end
+  	@tweets = @total_tweets.page(params[:tweets_page]).per(20)
 	respond_to do |format|
 
 		format.html { render "search" and return }
-		format.csv { send_data @tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
+		format.csv { send_data @total_tweets.to_csv, filename: "tweets-#{Date.today}.csv" }
 	end
   end
 
