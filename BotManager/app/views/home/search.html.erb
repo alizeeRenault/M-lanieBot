@@ -10,7 +10,7 @@
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $(".container-fluid").filter(function() {
+    $(".search-fly").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -75,7 +75,7 @@ $(document).ready(function(){
 <% @tweets.each do |t| %>
 	<% aler_text = Alert.find(t.alert_id).try(:text) %>
 
-	<div class="container-fluid mt--6" style="margin-bottom: 10px;" data-search="<%= aler_text %> <%= t.user_name %>">
+	<div class="container-fluid mt--6 search-fly" style="margin-bottom: 10px;" data-search="<%= aler_text %> <%= t.user_name %>">
 		<div class="row" style="margin-top: 85px;">
 			<div class="col-md-6">
 				<div class="card">
