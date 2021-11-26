@@ -99,27 +99,73 @@ $(document).ready(function(){
 		          </div>
 				</div>
 				<div class="col-md-6">
-					<div  class="card">
+					<div class="row">
 
-			            <div class="card-header border-0">
-			              <div class="row align-items-center">
-			                <div class="col">
-			                  <!-- <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6> -->
-			                  <h5 class="h3 text-default mb-0">Tweet informations</h5>
-			                </div>
-			                <div class="col">
+						<div  class="card">
+
+				            <div class="card-header border-0">
+				              <div class="row align-items-center">
+				                <div class="col">
+				                  <!-- <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6> -->
+				                  <h5 class="h3 text-default mb-0">Tweet informations</h5>
+				                </div>
+				                <div class="col">
+				                </div>
+				              </div>
+				            </div>
+			            	<div class="card-body">
+								<p><strong>twitter ID</strong> <%= t.tid %></p>
+								<p><strong>twitter Author</strong> <%= t.user_name %></p>
+								<p><strong>abstract text</strong> <%= t.text %></p>
+								<p><strong>Link </strong><a href="<%= t.link %>" target="_blank"><%= t.link %></a></p>
+								<p><strong>Archive Link </strong><a href="<%= t.archive_link %>" target="_blank"><%= t.archive_link %></a></p>
+								<p class="alert-text"><strong>Alert Text</strong> <%= aler_text %></p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+			            <div class="col-xl-3 col-md-6">
+			              <div class="card card-stats">
+			                <!-- Card body -->
+			                <div class="card-body">
+			                  <div class="row">
+			                    <div class="col">
+			                      <h5 class="card-title text-uppercase text-muted mb-0">Reported tweets from user</h5>
+			                      <span class="h2 font-weight-bold mb-0"><%= Tweet.where("user_name = ?", "%#{t.user_name}%").count %></span>
+			                    </div>
+			                    <div class="col-auto">
+			                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+			                        <i class="ni ni-active-40"></i>
+			                      </div>
+			                    </div>
+			                  </div>
+			                  <p class="mt-3 mb-0 text-sm">
+			                    <span class="text-nowrap">Since begining</span>
+			                  </p>
 			                </div>
 			              </div>
 			            </div>
-		            	<div class="card-body">
-							<p><strong>twitter ID</strong> <%= t.tid %></p>
-							<p><strong>twitter Author</strong> <%= t.user_name %></p>
-							<p><strong>abstract text</strong> <%= t.text %></p>
-							<p><strong>Link </strong><a href="<%= t.link %>" target="_blank"><%= t.link %></a></p>
-							<p><strong>Archive Link </strong><a href="<%= t.archive_link %>" target="_blank"><%= t.archive_link %></a></p>
-							<p class="alert-text"><strong>Alert Text</strong> <%= aler_text %></p>
-						</div>
-					</div>
+			            <div class="col-xl-3 col-md-6">
+			              <div class="card card-stats">
+			                <!-- Card body -->
+			                <div class="card-body">
+			                  <div class="row">
+			                    <div class="col">
+			                      <h5 class="card-title text-uppercase text-muted mb-0">Reported_by</h5>
+			                      <span class="h2 font-weight-bold mb-0"><%= Alert.find(t.alert_id).user_name %></span>
+			                    </div>
+			                    <div class="col-auto">
+			                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+			                        <i class="ni ni-money-coins"></i>
+			                      </div>
+			                    </div>
+			                  </div>
+			                  <p class="mt-3 mb-0 text-sm">
+			                  </p>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
 				</div>
 			</div>
 		
