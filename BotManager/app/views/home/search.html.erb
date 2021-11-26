@@ -131,7 +131,7 @@ $(document).ready(function(){
 			                  <div class="row">
 			                    <div class="col">
 			                      <h5 class="card-title text-uppercase text-muted mb-0">Reported tweets from user</h5>
-			                      <span class="h2 font-weight-bold mb-0"><%= Tweet.where("user_name = ?", "%#{t.user_name}%").count %></span>
+			                      <span class="h2 font-weight-bold mb-0"><%= Tweet.where("user_name = ?", "#{t.user_name}").count %></span>
 			                    </div>
 			                    <div class="col-auto">
 			                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
