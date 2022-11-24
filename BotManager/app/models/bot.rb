@@ -123,7 +123,7 @@ class Bot < ApplicationRecord
 
 
 	def self.add_one_tweet id
-		t = Bot.find_by_id "1450033963234365440"
+		t = Bot.find_by_id "1595906207453433857"
 		a = Alert.create(tid: t.id, link: t.url.to_s, user_name: t.user.screen_name, text: t.text)
 		res = Bot.find_by_id id
 		if Tweet.where(tid: id).count == 0
