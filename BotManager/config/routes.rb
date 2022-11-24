@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/stats' => 'home#stat'
   get '/delete' => 'home#delete'
   post '/api/post_tweet' => 'api#post_tweet'
+  get '/api/post_tweet' => 'api#post_tweet'
   delete '/delete/tweet' => 'home#delete_tweet'
   delete '/delete/user' => 'home#delete_user'
   delete '/add/tweet' => 'home#add_tweet'
