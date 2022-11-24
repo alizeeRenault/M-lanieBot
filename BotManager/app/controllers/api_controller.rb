@@ -5,8 +5,8 @@ class ApiController < ApplicationController
 		begin
 			Bot.add_one_tweet params[:tid]
 		rescue
-			render status: 500 and return
+			render :nothing => true, status: 500 and return
 		end
-		render status: 200 and return
+		render :nothing => true, status: 200 and return
 	end
 end
