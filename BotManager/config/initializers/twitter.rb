@@ -1,13 +1,13 @@
 CLIENT = Twitter::REST::Client.new do |config|
-	# config.consumer_key = "cpZk11aN9xdwyIRUkb1oItV7s"
-	# config.consumer_secret = "2EJd0cAndo7kL6anSOlXVPghpSAYgYPEK2eLNaiNuF0AKTpxvd"
-	# config.access_token = "1347605093651197952-ttIm4uUVU8o5RjHVKjfsnIlzFwjTWs"
-	# config.access_token_secret = "dOPlMyHy96Edg43qNsWE2K1vCC6UdfX4SjBSrpJtRXbrL"
+	config.consumer_key = "cpZk11aN9xdwyIRUkb1oItV7s"
+	config.consumer_secret = "2EJd0cAndo7kL6anSOlXVPghpSAYgYPEK2eLNaiNuF0AKTpxvd"
+	config.access_token = "1347605093651197952-ttIm4uUVU8o5RjHVKjfsnIlzFwjTWs"
+	config.access_token_secret = "dOPlMyHy96Edg43qNsWE2K1vCC6UdfX4SjBSrpJtRXbrL"
 
-	config.consumer_key = "EMPD12wNE8vr8BxEOiUJqyWRj"
-	config.consumer_secret = "LAijeoP44BocwtfTsKosZb0z7oqafj1ox5YtuNcJY9ZoP8niHR"
-	config.access_token = "1596091893045202944-iHUfltNsLj7Kgtpp5sjVHbfZ7kaBI0"
-	config.access_token_secret = "os3LK170SQSJw1yeoWGvChWoMuwqYtlzBw5jGMLzxJeGO"
+# 	config.consumer_key = "EMPD12wNE8vr8BxEOiUJqyWRj"
+# 	config.consumer_secret = "LAijeoP44BocwtfTsKosZb0z7oqafj1ox5YtuNcJY9ZoP8niHR"
+# 	config.access_token = "1596091893045202944-iHUfltNsLj7Kgtpp5sjVHbfZ7kaBI0"
+# 	config.access_token_secret = "os3LK170SQSJw1yeoWGvChWoMuwqYtlzBw5jGMLzxJeGO"
 end
 #cpZk11aN9xdwyIRUkb1oItV7s APIKEY
 #2EJd0cAndo7kL6anSOlXVPghpSAYgYPEK2eLNaiNuF0AKTpxvd API secret
