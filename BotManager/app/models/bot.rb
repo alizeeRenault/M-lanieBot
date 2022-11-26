@@ -11,7 +11,7 @@ class Bot < ApplicationRecord
 	end
 
 	def self.find_by_id id
-		CLIENT.status(id) rescue nil
+		CLIENT.status(id)
 	end
 
 	def self.sanitize_search_result search
