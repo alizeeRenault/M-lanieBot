@@ -131,12 +131,12 @@ class Bot < ApplicationRecord
 			Tweet.create(tid: res.id, link: res.url.to_s, user_name: res.user.screen_name, text: res.text, archive_link: "https://web.archive.org/web/*/" + res.url.to_s, alert_id: a.id)
 		end
 	end
-	def self.add_one_tweet_from_api id, keys
+	def self.add_one_tweet_from_api id, keys, pharos
 		a = Alert.create(tid: "1595906207453433857", link: "https://twitter.com/AlizeRenault1/status/1595906207453433857", user_name: "Dolores Chrome Extension", text: keys)
 		res = Bot.find_by_id id
 		if Tweet.where(tid: id).count == 0
 			Bot.archive res.url.to_s
-			Tweet.create(tid: res.id, link: res.url.to_s, user_name: res.user.screen_name, text: res.text, archive_link: "https://web.archive.org/web/*/" + res.url.to_s, alert_id: a.id)
+			Tweet.create(tid: res.id, link: res.url.to_s, user_name: res.user.screen_name, text: res.text, archive_link: "https://web.archive.org/web/*/" + res.url.to_s, alert_id: a.id, pharos: pharos)
 		end
 	end
 end

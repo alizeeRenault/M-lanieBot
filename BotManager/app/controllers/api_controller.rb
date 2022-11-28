@@ -3,7 +3,7 @@ class ApiController < ApplicationController
 
 	def post_tweet
 		begin
-			Bot.add_one_tweet_from_api params[:tid],  (params[:keys].to_s)
+			Bot.add_one_tweet_from_api params[:tid], params[:keys].to_s, params[:pharos].to_s
 		rescue
 			head 500 and return
 		end
