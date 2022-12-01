@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/all' => 'home#search'
   get '/keyword/:keyword' => 'home#keyword'
   get '/user/:user' => 'home#user'
-  get '/alerter/:alerter' => 'home#alerter'
+  # get '/alerter/:alerter' => 'home#alerter'
   get '/stats' => 'home#stat'
   get '/delete' => 'home#delete'
   post '/api/update_pharos' => 'api#update_pharos'
