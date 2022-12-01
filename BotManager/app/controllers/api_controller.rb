@@ -9,4 +9,16 @@ class ApiController < ApplicationController
 		end
 		head 200 and return
 	end
+
+	def update_pharos
+
+		begin
+			tweet = Tweet.find_by(tid: params[:tid])
+			tweet.update!(pharos_id: params[:pharos].to_s) if !tweet.pharos_id
+		rescue
+			head 500 and return
+		end
+		head 200 and return
+
+	end
 end

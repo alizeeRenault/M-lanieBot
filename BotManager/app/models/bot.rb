@@ -136,7 +136,7 @@ class Bot < ApplicationRecord
 		res = Bot.find_by_id id
 		if Tweet.where(tid: id).count == 0
 			Bot.archive res.url.to_s
-			Tweet.create(tid: res.id, link: res.url.to_s, user_name: res.user.screen_name, text: res.text, archive_link: "https://web.archive.org/web/*/" + res.url.to_s, alert_id: a.id, pharos: pharos)
+			Tweet.create(tid: res.id, link: res.url.to_s, user_name: res.user.screen_name, text: res.text, archive_link: "https://web.archive.org/web/*/" + res.url.to_s, alert_id: a.id, pharos_id: pharos)
 		end
 	end
 end
